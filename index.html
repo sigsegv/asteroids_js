@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8">
+<title>springbok</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="util.js"></script>
+    <script src="Transform.js"></script>
+    <script src="GameObject.js"></script>
+    <script src="Renderer.js"></script>
+    <script src="Engine.js"></script>
+    <script src="PlayerShip.js"></script>
+    <script src="PlayerShipCore.js"></script>
+    <script src="Time.js"></script>
+    <script src="Input.js"></script>
+    <script src="Component.js"></script>
+    <script src="Asteroid.js"></script>
+    <script src="MoveComponent.js"></script>
+    <script src="RigidBody2D.js"></script>
+    <script src="Rect.js"></script>
+    <script src="MainGun.js"></script>
+    <script src="Photon.js"></script>
+    <script src="PhotonCore.js"></script>
+    <script src="WrapAround.js"></script>
+    <script src="AsteroidCore.js"></script>
+    <script src="AsteroidCoreLarge.js"></script>
+    <script src="Collider2D.js"></script>
+    <script src="CircleCollider2D.js"></script>
+    <script src="CollisionSystem.js"></script>
+    <script src="GameManager.js"></script>
+    <script src="GameManagerCore.js"></script>
+    <script>
+        var engine = null;
+        // framerate logic from Phrogz at http://stackoverflow.com/questions/4787431/check-fps-in-js
+        var filterStrength = 20;
+        var frameTime = 0, lastLoop = new Date, thisLoop;
+        
+        function onFocus() {
+            engine.onFocus();
+        }
+        
+        function onBlur() {
+            engine.onBlur();
+        }
+        
+        function onLoad() {
+            console.log('onload');
+            
+            //Dwarf.Vector3.test();
+            
+            engine = new Dwarf.Engine(
+                {'root': document.getElementById('main'),
+                 'canvas':document.getElementById('main_canvas')
+                });
+            Dwarf.Engine.instance = engine;
+            engine.init();
+            var fps = 30.0;
+            var ms = 1000.0 / fps;
+            engine.start();
+            setInterval(update, ms);
+            
+            var constructor = function (proto) {
+                var that, private_var_x, private_func;
+                that = Object.create(proto || {});
+                private_var_x = 0;
+                
+                private_func = function () {
+                    private_var_x++;    
+                };
+                
+                that.set_x = function (x) {
+                    private_var_x = x;
+                };
+                
+                that.get_x = function () {
+                    return private_var_x;
+                };
+                
+                that.func = function () {
+                    private_func();    
+                };
+                
+                that.foo = function () {
+                    if (that.pub_var) {
+                        console.log(that.pub_var.name);
+                    }
+                }
+                
+                that.pub_var = null;
+                
+                return that;
+            };
+            
+            var sub_ctor = function (proto) {
+                var that;
+                that = constructor(proto);
+                return that;
+            }
+            
+            var b = sub_ctor();
+            b.pub_var = { name : 'gameObject' };
+            b.foo();
+            
+            var fpsOut = document.getElementById('fps');
+            setInterval(function(){
+                fpsOut.innerHTML = (1000/frameTime).toFixed(1) + " fps";
+            },1000);
+        }
+        
+        function update() {
+            engine.update();
+            /**
+             * FPS
+             */
+            var thisFrameTime = (thisLoop=new Date) - lastLoop;
+            frameTime+= (thisFrameTime - frameTime) / filterStrength;
+            lastLoop = thisLoop;
+        }
+        function draw() {
+            
+        }
+    </script>
+</head>
+<body onload=onLoad()>
+    <div id='main' >
+        <canvas id='main_canvas' width='800' height='800' tabindex="1" onfocus=onFocus() onblur=onBlur()></canvas>
+    </div>
+    <div><span id='fps'/></div>
+</body>
+</html>

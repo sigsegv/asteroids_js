@@ -12,6 +12,6 @@ Control | Action
 --|------
 W | Prograde thruster
 A | Positive rotation
-D | Negative rotation
 S | Retrograde thruster
+D | Negative rotation
 Spacebar | Photon Torpedo

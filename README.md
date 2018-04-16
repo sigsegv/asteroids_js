@@ -1,5 +1,5 @@
 # asteroids_js
-Asteroids game in vanilla javascript using Entity+Component pattern.
+Asteroids game in vanilla javascript using Entity+Component pattern, and HTML5 canvas.
 
 Mainly an excuse to practice the Javascript coding style/patterns as described in Douglas Crockford's [JavaScript: The Good Parts](https://www.amazon.com/exec/obidos/ASIN/0596517742/wrrrldwideweb)
 

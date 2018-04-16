@@ -15,3 +15,5 @@ A | Positive rotation
 S | Retrograde thruster
 D | Negative rotation
 Spacebar | Photon Torpedo
+
+![Image of Gameplay](./screenshot.png)
